@@ -71,7 +71,11 @@ def truncate_to_100_chars(text):
 
 def load_fonts(size):
     fonts = []
-    paths = ["DejaVuSans-Bold.ttf", "NotoSansKR-Bold.ttf", "NotoSansSymbols-Bold.ttf"]
+    # Only two fonts: Western first, then full CJK bold fallback
+    paths = [
+        "DejaVuSans-Bold.ttf",
+        "NotoSansCJK-Bold.ttc"
+    ]
     for path in paths:
         try:
             font = ImageFont.truetype(path, size)
@@ -80,6 +84,21 @@ def load_fonts(size):
             print(f"❌ Failed to load font '{path}': {e}")
             fonts.append(None)
     return fonts
+
+font_names = ["DejaVuSans", "NotoSansCJK"]
+
+def is_ascii(text):
+    return all(ord(c) < 128 for c in text)
+
+def choose_font(text, fonts, names):
+    # Use DejaVuSans ONLY for pure ASCII (English + symbols)
+    if is_ascii(text) and fonts[0] is not None:
+        return fonts[0]  # DejaVuSans
+    # Otherwise, use CJK font for any Unicode
+    for font, name in zip(fonts, names):
+        if font and can_render_all(text, font, name):
+            return font
+    return fonts[0]  # Fallback
 
 def can_render_all(text, font, name):
     try:
@@ -94,12 +113,6 @@ def can_render_all(text, font, name):
     except Exception as e:
         print(f"❌ Exception checking '{name}': {e}")
         return False
-
-def choose_font(text, fonts, names):
-    for font, name in zip(fonts, names):
-        if font and can_render_all(text, font, name):
-            return font
-    return fonts[0]  # Fallback
 
 # =========================================================
 # FEATURE 1: DAILY SERVER RENAME & ICON (QUOTE OF THE DAY)
