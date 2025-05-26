@@ -20,9 +20,9 @@ from io import BytesIO
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import logging
 import os
+import string
 
 # ================ ENVIRONMENT CONFIG (RAILWAY/.env) ================
-# Token and server/channel IDs
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD_ID = int(os.getenv('GUILD_ID', '0'))
 QUOTE_CHANNEL_ID = int(os.getenv('QUOTE_CHANNEL_ID', '0'))
@@ -87,14 +87,15 @@ def load_fonts(size):
 
 font_names = ["DejaVuSans", "NotoSansCJK"]
 
-def is_ascii(text):
-    return all(ord(c) < 128 for c in text)
+def is_pure_ascii(text):
+    # Only allow standard ASCII (English letters, digits, punctuation, space)
+    return all(c in string.ascii_letters + string.digits + string.punctuation + " " for c in text)
 
 def choose_font(text, fonts, names):
-    # Use DejaVuSans ONLY for pure ASCII (English + symbols)
-    if is_ascii(text) and fonts[0] is not None:
+    # Only use DejaVuSans for truly pure ASCII (English/Western only)
+    if is_pure_ascii(text) and fonts[0] is not None:
         return fonts[0]  # DejaVuSans
-    # Otherwise, use CJK font for any Unicode
+    # Otherwise, check all fonts for Unicode support
     for font, name in zip(fonts, names):
         if font and can_render_all(text, font, name):
             return font
@@ -132,8 +133,7 @@ async def generate_card(server_name, quote_user, icon_user, icon_bytes):
         draw = ImageDraw.Draw(base)
         title_fonts = load_fonts(36)
         meta_fonts = load_fonts(24)
-        font_names = ["DejaVuSans", "NotoSansKR", "NotoSansSymbols"]
-
+        # Use global font_names so it matches font order!
         words, line, lines = server_name.split(), "", []
         for word in words:
             test = f"{line} {word}".strip()
