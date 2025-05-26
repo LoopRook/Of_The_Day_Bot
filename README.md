@@ -113,4 +113,3 @@ Pull requests and suggestions are welcome! Please open an issue first to discuss
 
 ---
 
-**Made with ❤️ for the Discord community.**
