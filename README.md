@@ -15,6 +15,33 @@ A Discord bot for daily server quotes and music sharing, fully configurable via 
 
 ## **Setup**
 
+### **Register Your Own Discord Bot**
+
+Before you can run this bot in your server, you need to create your own Discord Bot Application and get a bot token.
+
+1. Go to the [Discord Developer Portal](https://discord.com/developers/applications) and log in.
+2. Click **"New Application"**. Name it anything you like.
+3. In your application, go to **"Bot"** in the left sidebar and click **"Add Bot"**.
+4. Under the Bot settings, click **"Reset Token"** (if needed) and **copy the token** (you will use this in your `.env` or Railway Variables).
+5. Set the following required permissions for your bot under "OAuth2" > "URL Generator":
+
+* `Read Messages/View Channels`
+* `Send Messages`
+* `Attach Files`
+* `Embed Links`
+* `Read Message History`
+* `Manage Server` *(required for changing server name or icon for Quote of the Day)*
+
+**Recommended:**
+
+* `Manage Messages` *(for future features or cleanup commands)*
+* `Use Slash Commands` *(if you expand the bot later)*
+
+*In the URL Generator, select "bot" and then check each permission above. Then use the generated OAuth2 URL to invite your bot to your server.*
+6\. Use the generated OAuth2 URL to invite your bot to your server.
+
+You will need this token and your server's/channel's IDs to configure the bot below.
+
 1. **Clone this repository**
 
    ```bash
@@ -94,7 +121,7 @@ SONG_TIME=10:00
 
 ## **Security & Best Practices**
 
-* **Never commit your real `.env` file** or Discord token to GitHub!
+* **Never commit your real ****`.env`**** file** or Discord token to GitHub!
   (It’s already ignored by `.gitignore`.)
 * Use `.env.example` for sharing config structure.
 * Grant your bot only the permissions it needs in your Discord server.
@@ -112,4 +139,3 @@ MIT License. See [LICENSE](LICENSE) for details.
 Pull requests and suggestions are welcome! Please open an issue first to discuss major changes.
 
 ---
-
