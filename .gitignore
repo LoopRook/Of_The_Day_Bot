@@ -1,0 +1,12 @@
+# Ignore your real secrets
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# OS junk files
+.DS_Store
+Thumbs.db
