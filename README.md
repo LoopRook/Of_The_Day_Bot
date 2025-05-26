@@ -119,6 +119,25 @@ SONG_TIME=10:00
 
 ---
 
+## **Choosing Your Channel IDs**
+
+Each of these should be a Discord channel in your server (find the channel’s ID by enabling Developer Mode in Discord and right-clicking the channel):
+
+| ENV Variable           | What to Use This For                                                                                                    |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `QUOTE_CHANNEL_ID`     | Channel where people post possible new server names/quotes. Bot pulls random lines from here for the daily server name. |
+| `ICON_CHANNEL_ID`      | Channel where people post images to use as the server icon. Bot picks random images here for the daily icon.            |
+| `POST_CHANNEL_ID`      | Channel where the bot posts the daily server card image (the quote/image card). Recommended: A “bot-log” or similar.    |
+| `MUSIC_CHANNEL_ID`     | Channel where users share music links (YouTube, SoundCloud, Spotify, etc).                                              |
+| `SONG_POST_CHANNEL_ID` | Channel where the bot will post the daily song of the day. Usually a public “general” or music channel.                 |
+
+> **To get a channel’s ID:**
+> Enable “Developer Mode” in Discord settings, then right-click the channel and select **“Copy ID”**.
+
+---
+
+---
+
 ## **Security & Best Practices**
 
 * **Never commit your real ****`.env`**** file** or Discord token to GitHub!
