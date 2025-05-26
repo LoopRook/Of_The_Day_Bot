@@ -119,7 +119,7 @@ async def generate_card(server_name, quote_user, icon_user, icon_bytes):
         draw = ImageDraw.Draw(base)
         title_fonts = load_fonts(36)
         meta_fonts = load_fonts(24)
-        font_names = ["NotoSansKR", "NotoSansSymbols", "DejaVuSans"]
+        font_names = ["DejaVuSans", "NotoSansKR", "NotoSansSymbols"]
 
         words, line, lines = server_name.split(), "", []
         for word in words:
