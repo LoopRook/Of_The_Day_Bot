@@ -71,7 +71,7 @@ def truncate_to_100_chars(text):
 
 def load_fonts(size):
     fonts = []
-    paths = ["NotoSansKR-Bold.ttf", "NotoSansSymbols-Bold.ttf", "DejaVuSans-Bold.ttf"]
+    paths = ["DejaVuSans-Bold.ttf", "NotoSansKR-Bold.ttf", "NotoSansSymbols-Bold.ttf"]
     for path in paths:
         try:
             font = ImageFont.truetype(path, size)
